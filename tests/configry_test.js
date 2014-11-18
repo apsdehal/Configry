@@ -1,7 +1,7 @@
-var Configurator = require('../src/configurator.js');
+var Configry = require('../src/configry.js');
 
-describe("Configurator", function() {
-  var config = new Configurator(
+describe("configry", function() {
+  var config = new Configry(
     {
       a:12,
       b:2

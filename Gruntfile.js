@@ -6,13 +6,13 @@ module.exports = function ( grunt ) {
 	grunt.initConfig({
 	    // Browserify the modules
 		browserify : {
-			configurator : {
-				src : "src/configurator.js",
-				dest : "build/configurator.js" 
+			configry : {
+				src : "src/configry.js",
+				dest : "build/configry.js" 
 			},
 			tests : {
-				src : "tests/configurator_test.js",
-				dest : "build/configurator_test.js"
+				src : "tests/configry_test.js",
+				dest : "build/configry_test.js"
 			}
 		},
 
@@ -27,5 +27,5 @@ module.exports = function ( grunt ) {
 	// Define dev environment tasks
 	grunt.registerTask('default',['browserify', 'karma:unit']);
 	// Define production environment tasks
-	grunt.registerTask('production', ['env:prod', 'browserify:configuratorg']);
+	grunt.registerTask('production', ['env:prod', 'browserify:configryg']);
 };

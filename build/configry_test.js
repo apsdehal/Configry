@@ -1,16 +1,17 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
- * Configurator class for storing key-value pairs in localStorage
+ * Configry class for storing key-value pairs in localStorage
  * or for a single session
  *
- * @author Abhay Rana <capt.n3m0@gmail.com>
+ * @author Abhay Rana <capt.n3m0@gmail.com> {He is the original author for Configurator}
  * @contributor Amanpreet Singh <apsdehal@gmail.com>
  */  
 
 // Export the module
-module.exports = Configurator;
+module.exports = Configry;
 
 /**
- * Constructor function for configurator, gets config back from localStorage back if there is one
+ * Constructor function for Configry, gets config back from localStorage back if there is one
  * initialize a config property with key-value pairs from localStorage config and passed default
  * config
  *
@@ -18,7 +19,7 @@ module.exports = Configurator;
  * @param array persistent Key strings array that you want to be persitent via localStorage
  */
 
-function Configurator (defaultConfig, persistent) {
+function Configry (defaultConfig, persistent) {
   // The default object
   this.config = defaultConfig||{};
   this.persistent = persistent||[];
@@ -39,7 +40,7 @@ function Configurator (defaultConfig, persistent) {
  * @param string key Returns the value for a particular key
  */
 
-Configurator.prototype.get = function (key) {
+Configry.prototype.get = function (key) {
   // if key is direct (usual case)
   if (key.indexOf('.') < 0) {
     return this.config[key];
@@ -70,7 +71,7 @@ Configurator.prototype.get = function (key) {
  * @param boolean per If this key has to be persistent
  */
 
-Configurator.prototype.set = function (key, value, per) {
+Configry.prototype.set = function (key, value, per) {
   per = per||false;
   if (key.indexOf('.') < 0) {
     this.config[key] = value;
@@ -106,7 +107,43 @@ Configurator.prototype.set = function (key, value, per) {
  * config is not affected
  */
 
-Configurator.prototype.clearLS = function () {
+Configry.prototype.clearLS = function () {
   localStorage.clear();
   localStorage.setItem('config',JSON.stringify(this.config));
 };
+},{}],2:[function(require,module,exports){
+var Configry = require('../src/configry.js');
+
+describe("configry", function() {
+  var config = new Configry(
+    {
+      a:12,
+      b:2
+    }
+    ,['b']
+  );
+
+  it("should initialize with default values", function() {
+    expect(config.get('a')).toBe(12);
+    expect(config.get('b')).toBe(2);
+  });
+
+  it("should set nested values",function(){
+  	config.set("x.b.c.d",123);
+  	expect(config.get("x.b.c.d")).toBe(123);
+  });
+
+  it("should persist values after clearing localStorage",function(){
+  	config.clearLS();
+  	expect(config.get("b")).toBe(2);
+  });
+
+  it("should add persistent keys", function(){
+  	config.set("c",3,true);
+  	config.clearLS();
+  	expect(config.get("c")).toBe(3);
+  });
+
+});
+
+},{"../src/configry.js":1}]},{},[2]);
