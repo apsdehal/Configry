@@ -1,5 +1,5 @@
 {
-    "name": "configurator",
+    "name": "configry",
     "version": "1.1.0",
 	"description": "Javascript configuration library to handle an application's configuration. Stores config to localstorage.",
     "main": "build/configry.js"
