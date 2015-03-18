@@ -26,7 +26,7 @@ function Configry (defaultConfig, persistent) {
   // using localStorage
   var conf = JSON.parse(localStorage.getItem('config'));
   if (conf) {
-    for (i in this.conf) {
+    for (i in conf) {
       this.config[i] = conf[i];
     }
   }
