@@ -1,4 +1,4 @@
-# Configry 
+# Configry  [![Build Status](https://travis-ci.org/apsdehal/configry.svg?branch=master)](https://travis-ci.org/apsdehal/awesome-ctf)
 
 Configry is a config manager library for Javascript. It uses localStorage to store persistent configurations in the browser. Use it woth your favorite tool like browserify or get a precompiled bundle from bower.
 
@@ -46,6 +46,10 @@ var shuffleState = config.get('shuffle');
 
 ### Localstorage clearing
 Since Configry stores the persistent config information in localstorage, you cannot clear localstorage using localStorage.clear any more. Instead use `config.clearLS()` function to clear the localStorage. It will clear localstorage, and write the persistent config keys back into localStorage.
+
+## Tests
+
+Run `grunt default` command to run tests on karma using phantomjs and jasmine. This task will also run the browserify task. For specific only test task run `grunt karma:unit`
 
 #Licence
 
