@@ -1,7 +1,9 @@
 module.exports = function ( grunt ) {
 	// Load all grunt tasks
-	require("matchdep").filter("grunt-*").forEach(grunt.loadNpmTasks);
-	
+	grunt.loadNpmTasks("grunt-karma");	
+	grunt.loadNpmTasks("grunt-browserify");	
+	grunt.loadNpmTasks("grunt-contrib-uglify");	
+	grunt.loadNpmTasks("grunt-contrib-jasmine");	
 	// init the grunt config
 	grunt.initConfig({
 	    // Browserify the modules
@@ -27,5 +29,5 @@ module.exports = function ( grunt ) {
 	// Define dev environment tasks
 	grunt.registerTask('default',['browserify', 'karma:unit']);
 	// Define production environment tasks
-	grunt.registerTask('production', ['env:prod', 'browserify:configryg']);
+	grunt.registerTask('production', ['env:prod', 'browserify:configry']);
 };
