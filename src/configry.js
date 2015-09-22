@@ -79,7 +79,7 @@ Configry.prototype.set = function (key, value, per) {
     var keys=key.split('.');
     // a.b.c.d=value => {a:{b:{c:{d:value}}}}
     for (var i = 0, tmp = this.config; i < keys.length - 1; i++) {
-      if (typeof tmp[keys[i]] == 'object') {
+      if (typeof tmp[keys[i]] === 'object') {
         tmp = tmp[keys[i]];
       } else {
         tmp = tmp[keys[i]] = {};
