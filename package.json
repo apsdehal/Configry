@@ -14,12 +14,6 @@
       "url": "http://captnemo.in"
     }
   ],
-  "dependencies": {
-    "grunt": "",
-    "grunt-contrib-uglify": "",
-    "grunt-browserify": "",
-    "matchdep": ""
-  },
   "repository": {
     "type": "git",
     "url": "http://github.com/apsdehal/configry"
@@ -27,7 +21,7 @@
   "license": "MIT",
   "main": "src/configry.js",
   "scripts": {
-    "test": "grunt karma:unit"
+    "test": "grunt default"
   },
   "keywords": [
     "config",
@@ -38,7 +32,13 @@
     "key",
     "value"
   ],
+  "peerDependencies": {
+    "karma": ">=0.9.0 || >=0.13.0-rc.0"
+  },
   "devDependencies": {
+    "grunt": "",
+    "grunt-contrib-uglify": "",
+    "grunt-browserify": "",
     "grunt-contrib-jasmine": "",
     "grunt-karma": "",   
     "jasmine-core": "^2.1.2",
