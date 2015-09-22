@@ -1,4 +1,4 @@
-# Configry  [![Build Status](https://travis-ci.org/apsdehal/configry.svg?branch=master)](https://travis-ci.org/apsdehal/awesome-ctf)
+# Configry [![Build Status](https://travis-ci.org/apsdehal/Configry.svg?branch=1.1.3)](https://travis-ci.org/apsdehal/Configry)
 
 Configry is a config manager library for Javascript. It uses localStorage to store persistent configurations in the browser. Use it woth your favorite tool like browserify or get a precompiled bundle from bower.
 
