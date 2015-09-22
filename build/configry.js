@@ -27,7 +27,7 @@ function Configry (defaultConfig, persistent) {
   // using localStorage
   var conf = JSON.parse(localStorage.getItem('config'));
   if (conf) {
-    for (i in this.conf) {
+    for (i in conf) {
       this.config[i] = conf[i];
     }
   }
@@ -80,7 +80,11 @@ Configry.prototype.set = function (key, value, per) {
     var keys=key.split('.');
     // a.b.c.d=value => {a:{b:{c:{d:value}}}}
     for (var i = 0, tmp = this.config; i < keys.length - 1; i++) {
-       tmp = tmp[keys[i]] = {};
+      if (typeof tmp[keys[i]] === 'object') {
+        tmp = tmp[keys[i]];
+      } else {
+        tmp = tmp[keys[i]] = {};
+      }
     }
     tmp[keys[i]] = value;
   }
@@ -111,4 +115,5 @@ Configry.prototype.clearLS = function () {
   localStorage.clear();
   localStorage.setItem('config',JSON.stringify(this.config));
 };
+
 },{}]},{},[1]);

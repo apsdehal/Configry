@@ -27,7 +27,7 @@ function Configry (defaultConfig, persistent) {
   // using localStorage
   var conf = JSON.parse(localStorage.getItem('config'));
   if (conf) {
-    for (i in this.conf) {
+    for (i in conf) {
       this.config[i] = conf[i];
     }
   }
@@ -80,7 +80,11 @@ Configry.prototype.set = function (key, value, per) {
     var keys=key.split('.');
     // a.b.c.d=value => {a:{b:{c:{d:value}}}}
     for (var i = 0, tmp = this.config; i < keys.length - 1; i++) {
-       tmp = tmp[keys[i]] = {};
+      if (typeof tmp[keys[i]] === 'object') {
+        tmp = tmp[keys[i]];
+      } else {
+        tmp = tmp[keys[i]] = {};
+      }
     }
     tmp[keys[i]] = value;
   }
@@ -111,6 +115,7 @@ Configry.prototype.clearLS = function () {
   localStorage.clear();
   localStorage.setItem('config',JSON.stringify(this.config));
 };
+
 },{}],2:[function(require,module,exports){
 var Configry = require('../src/configry.js');
 
@@ -129,8 +134,14 @@ describe("configry", function() {
   });
 
   it("should set nested values",function(){
-  	config.set("x.b.c.d",123);
-  	expect(config.get("x.b.c.d")).toBe(123);
+    config.set("x.b.c.c",123);
+    config.set("x.b.c.d",1234);
+    config.set("x.b.c.d.d",1235);
+  	config.set("x.b.c.d.e",1236);
+    expect(config.get("x.b.c.c")).toBe(123);
+    expect(config.get("x.b.c.d")).toEqual({d: 1235, e: 1236});
+    expect(config.get("x.b.c.d.d")).toBe(1235);
+  	expect(config.get("x.b.c.d.e")).toBe(1236);
   });
 
   it("should persist values after clearing localStorage",function(){
